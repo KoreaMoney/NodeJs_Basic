@@ -19,14 +19,20 @@ app.get("/home", (req, res) => {
   res.send("<h1>Welcome Home</h1>");
 });
 
-// json형식으로 진행하기
-app.get("/product", (req, res) => {
+// json형식으로 진행하기 + param으로 진행하는 경우
+app.get("/product/:id", (req, res) => {
+  const q = req.params;
+  res.json({ products: q.id });
+});
+
+// json형식으로 진행하기 + query으로 진행하는 경우
+app.get("/user/:id", (req, res) => {
+  const q = req.query;
   res.json([
     {
-      Man: "Cloths",
-    },
-    {
-      Women: "Dress",
+      userId: q.q,
+      userName: q.name,
+      userAge: q.age,
     },
   ]);
 });
