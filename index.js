@@ -11,31 +11,55 @@ const port = 3000;
  * callback함수(함수가 끝나고 다시 실행하는 함수)로 이루어진다.
  * res.send에 html도 전달이 가능하다.
  */
-app.get("/", (req, res) => {
-  res.send("Main Root");
+
+// CORS 에러 수정
+const cors = require("cors");
+app.use(cors());
+
+// GET방식
+// app.get("/", (req, res) => {
+//   res.send("Main Root");
+// });
+
+// app.get("/home", (req, res) => {
+//   res.send("<h1>Welcome Home</h1>");
+// });
+
+// // json형식으로 진행하기 + param으로 진행하는 경우 (parameter로 전달해서 받는 방법)
+// app.get("/product/:id", (req, res) => {
+//   const q = req.params;
+//   res.json({ products: q.id });
+// });
+
+// // json형식으로 진행하기 + query으로 진행하는 경우 (주소/q?=parameter방식으로 진행)
+// app.get("/user/:id", (req, res) => {
+//   const q = req.query;
+//   res.json([
+//     {
+//       userId: q.q,
+//       userName: q.name,
+//       userAge: q.age,
+//     },
+//   ]);
+// });
+
+/**
+ * 실제 API생성해보기
+ */
+app.get("/sound/:name", (req, res) => {
+  const { name } = req.params; //{value를 넣어준다}
+  if (name === "cat") {
+    res.json({ sound: "냐오옹" });
+  } else if (name === "dog") {
+    res.json({ sound: "멍멍" });
+  } else if (name === "pig") {
+    res.json({ sound: "꿀꿀" });
+  } else {
+    res.json({ sound: "소리가 없음." });
+  }
 });
 
-app.get("/home", (req, res) => {
-  res.send("<h1>Welcome Home</h1>");
-});
-
-// json형식으로 진행하기 + param으로 진행하는 경우
-app.get("/product/:id", (req, res) => {
-  const q = req.params;
-  res.json({ products: q.id });
-});
-
-// json형식으로 진행하기 + query으로 진행하는 경우
-app.get("/user/:id", (req, res) => {
-  const q = req.query;
-  res.json([
-    {
-      userId: q.q,
-      userName: q.name,
-      userAge: q.age,
-    },
-  ]);
-});
+// POST방식
 
 /**
  * port : 도착지 (ex.배의 선착장)
