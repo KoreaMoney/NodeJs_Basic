@@ -17,13 +17,13 @@ const cors = require("cors");
 app.use(cors());
 
 // GET방식
-// app.get("/", (req, res) => {
-//   res.send("Main Root");
-// });
+app.get("/", (req, res) => {
+  res.send("Main Root");
+});
 
-// app.get("/home", (req, res) => {
-//   res.send("<h1>Welcome Home</h1>");
-// });
+app.get("/home", (req, res) => {
+  res.send("<h1>Welcome Home</h1>");
+});
 
 // // json형식으로 진행하기 + param으로 진행하는 경우 (parameter로 전달해서 받는 방법)
 // app.get("/product/:id", (req, res) => {
